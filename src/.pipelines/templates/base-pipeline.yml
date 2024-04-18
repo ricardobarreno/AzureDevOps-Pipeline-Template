@@ -1,7 +1,6 @@
 parameters:
   - name: language
     type: string
-    default: dotnet
     values:
       - dotnet
       - python
