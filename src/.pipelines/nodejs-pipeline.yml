@@ -17,4 +17,4 @@ extends:
   parameters:
     language: nodejs
     workingDirectory: src/azure-function-nodejs
-    repositoryName: richibarreno/azure-function-dotnet
+    repositoryName: richibarreno/azure-function-nodejs
