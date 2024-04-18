@@ -11,6 +11,17 @@ parameters:
     type: string
 
 stages:
+  - stage: parameters
+    displayName: Parameters
+    jobs:
+      - job: show_parameters
+        displayName: 'Show Parameters'
+        steps:
+          - script: |
+              echo "language --> ${{ parameters.language }}" 
+              echo "workingDirectory --> ${{ parameters.workingDirectory }}" 
+              echo "repositoryName --> ${{ parameters.repositoryName }}" 
+
   - ${{ if eq(parameters.language, 'dotnet') }}: 
     - template: dotnet-build-stage.yml
       parameters:
