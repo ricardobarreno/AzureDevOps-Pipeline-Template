@@ -1,0 +1,36 @@
+parameters:
+  - name: containerRegistry
+    type: string
+  - name: repository
+    type: string
+  - name: buildContext
+    type: string
+
+stages:
+  - stage: containerization
+    displayName: 'Containerization'
+
+    jobs:
+    
+      - job: containerizing
+        displayName: 'Containerizing'
+        
+        steps:
+          
+          - task: Docker@2
+            name: build_image
+            displayName: 'Build image'
+            inputs:
+              containerRegistry: '${{ parameters.containerRegistry }}'
+              repository: '${{ parameters.repository }}'
+              command: 'build'
+              Dockerfile: '**/Dockerfile'
+              buildContext: '${{ parameters.buildContext }}'
+          
+          - task: Docker@2
+            name: push_image
+            displayName: 'Push image'
+            inputs:
+              containerRegistry: '${{ parameters.containerRegistry }}'
+              repository: '${{ parameters.repository }}'
+              command: 'push'

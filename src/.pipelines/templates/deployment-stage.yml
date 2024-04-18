@@ -1,0 +1,12 @@
+stages:
+  - stage: deployment
+    displayName: 'Deployment'
+    
+    jobs:
+      
+      - job: deploying
+        displayName: 'Deploying'
+        
+        steps:
+          
+          - bash: echo 'Deploying.'

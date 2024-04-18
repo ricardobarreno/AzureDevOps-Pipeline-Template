@@ -1,0 +1,26 @@
+parameters:
+  - name: language
+    type: string
+    default: dotnet
+    values:
+      - dotnet
+      - python
+      - nodejs
+  - name: workingDirectory
+    type: string
+  - name: repositoryName
+    type: string
+
+stages:
+  - ${{ if eq(parameters.language, 'dotnet') }}: 
+    - template: dotnet-build-stage.yml
+      parameters:
+        workingDirectory: ${{ parameters.workingDirectory }}
+  
+  - template: contenerization-stage.yml
+    parameters:
+      containerRegistry: 'DockerHub'
+      repository: ${{ parameters.repositoryName }}
+      buildContext: ${{ parameters.workingDirectory }}
+  
+  - template: deployment-stage.yml

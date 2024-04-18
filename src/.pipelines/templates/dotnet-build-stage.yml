@@ -1,0 +1,31 @@
+parameters:
+  - name: workingDirectory
+    type: string
+
+stages:
+  - stage: build
+    displayName: 'Build'
+  
+    jobs: 
+  
+      - job: building
+        displayName: 'Building'
+  
+        steps:
+  
+          - task: DotNetCoreCLI@2
+            name: restore
+            displayName: 'Restore packages'
+            inputs:
+              command: 'restore'
+              feedsToUse: 'select'
+              projects: '**/*.csproj'
+              workingDirectory: ${{ parameters.workingDirectory }}
+  
+          - task: DotNetCoreCLI@2
+            name: build
+            displayName: 'Build app'
+            inputs:
+              command: 'build'
+              projects: '**/*.csproj'
+              workingDirectory: ${{ parameters.workingDirectory }}

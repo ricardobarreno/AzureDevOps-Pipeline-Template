@@ -1,0 +1,20 @@
+name: dotnet-pipeline
+
+trigger:
+  branches:
+    include: 
+      - main
+      - develop
+  paths:
+    include:
+      - src/azure-function-dotnet
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+extends:
+  template: templates/base-pipeline.yml
+  parameters:
+    language: dotnet
+    workingDirectory: src/azure-function-dotnet
+    repositoryName: richibarreno/azure-function-dotnet
