@@ -1,0 +1,20 @@
+name: nodejs-pipeline
+
+trigger:
+  branches:
+    include: 
+      - main
+      - develop
+  paths:
+    include:
+      - src/azure-function-nodejs
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+extends:
+  template: templates/base-pipeline.yml
+  parameters:
+    language: nodejs
+    workingDirectory: src/azure-function-nodejs
+    repositoryName: richibarreno/azure-function-dotnet

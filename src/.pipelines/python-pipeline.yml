@@ -1,0 +1,20 @@
+name: python-pipeline
+
+trigger:
+  branches:
+    include: 
+      - main
+      - develop
+  paths:
+    include:
+      - src/azure-function-python
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+extends:
+  template: templates/base-pipeline.yml
+  parameters:
+    language: python
+    workingDirectory: src/azure-function-python
+    repositoryName: richibarreno/azure-function-python
