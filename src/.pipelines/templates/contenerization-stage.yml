@@ -24,7 +24,7 @@ stages:
               containerRegistry: '${{ parameters.containerRegistry }}'
               repository: '${{ parameters.repository }}'
               command: 'build'
-              Dockerfile: 'Dockerfile'
+              Dockerfile: '${{ parameters.buildContext }}/Dockerfile'
               buildContext: '${{ parameters.buildContext }}'
           
           - task: Docker@2
