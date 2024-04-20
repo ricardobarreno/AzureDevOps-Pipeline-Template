@@ -32,4 +32,4 @@ stages:
       azureSubscription: '${{ variables.azureSubscription }}'
       containerAppName: '${{ variables.containerAppName }}'
       resourceGroup: '${{ variables.resourceGroupName }}'
-      imageToDeploy: '${{ variables.containerRegistryServer }}/${{ parameters.repository }}:$(Build.BuildId)'
+      imageToDeploy: '${{ variables.containerRegistryServer }}/${{ parameters.repositoryName }}:$(Build.BuildId)'
