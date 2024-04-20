@@ -17,7 +17,7 @@ stages:
             name: deploy_containerapp
             displayName: 'Deploy ContainerApp'
             inputs:
-              azureSubscription: '${{ variables.azureSubscription }}'
+              connectedServiceNameARM: '${{ variables.azureSubscription }}'
               containerAppName: '${{ variables.containerAppName }}'
               resourceGroup: '${{ variables.resourceGroupName }}'
               imageToDeploy: '${{ variables.containerRegistryServer }}/${{ parameters.repository }}:$(Build.BuildId)'
