@@ -15,7 +15,7 @@ variables:
     value: docker.io
   - name: azureSubscription
     value: GlobalAzure-Template-Pipelines
-  - name: apiContainerName
+  - name: containerAppName
     ${{ if eq(parameters.language, 'dotnet') }}:
       value: dotnet-containerapp
     ${{ if eq(parameters.language, 'python') }}:
