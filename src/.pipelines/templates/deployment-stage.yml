@@ -18,17 +18,12 @@ stages:
         displayName: 'Deploying'
         
         steps:
-          - bash: |
-              echo "${{ parameters.azureSubscription }}"
-              echo "${{ parameters.containerAppName }}"
-              echo "${{ parameters.resourceGroup }}"
-              echo "${{ parameters.imageToDeploy }}"
 
-          # - task: AzureContainerApps@1
-          #   name: deploy_containerapp
-          #   displayName: 'Deploy ContainerApp'
-          #   inputs:
-          #     azureSubscription: '${{ parameters.azureSubscription }}'
-          #     containerAppName: '${{ parameters.containerAppName }}'
-          #     resourceGroup: '${{ parameters.resourceGroup }}'
-          #     imageToDeploy: '${{ parameters.imageToDeploy }}'
+          - task: AzureContainerApps@1
+            name: deploy_containerapp
+            displayName: 'Deploy ContainerApp'
+            inputs:
+              azureSubscription: '${{ parameters.azureSubscription }}'
+              containerAppName: '${{ parameters.containerAppName }}'
+              resourceGroup: '${{ parameters.resourceGroup }}'
+              imageToDeploy: '${{ parameters.imageToDeploy }}'
