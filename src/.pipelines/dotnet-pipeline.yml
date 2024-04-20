@@ -17,4 +17,4 @@ extends:
   parameters:
     language: dotnet
     workingDirectory: src/azure-function-dotnet
-    repositoryName: richibarreno/azure-function-dotnet
+    repositoryName: azure-function-dotnet

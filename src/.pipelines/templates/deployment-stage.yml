@@ -1,3 +1,7 @@
+parameters:
+  - name: repository
+    type: string
+
 stages:
   - stage: deployment
     displayName: 'Deployment'
@@ -9,4 +13,21 @@ stages:
         
         steps:
           
-          - bash: echo 'Deploying.'
+          - task: AzureCLI@2
+            name: deploy_containerapp
+            displayName: 'Deploy ContainerApp'
+            inputs:
+              azureSubscription: '${{ variables.azureSubscription }}'
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                az extension add --name containerapp --upgrade
+                az containerapp update \
+                  --name ${{ variables.apiContainerName }} \
+                  --resource-group ${{ variables.resourceGroupName }} \
+                  --image ${{ variables.containerRegistryServer }}/${{ parameters.repository }}:$(Build.BuildId) \
+                  --cpu 1.0 \
+                  --memory 2.0Gi \
+                  --min-replicas 1 \
+                  --max-replicas 1 \
+                  --revision-suffix r$(Build.BuildId)"

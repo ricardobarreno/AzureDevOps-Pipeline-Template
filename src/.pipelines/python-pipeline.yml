@@ -17,4 +17,4 @@ extends:
   parameters:
     language: python
     workingDirectory: src/azure-function-python
-    repositoryName: richibarreno/azure-function-python
+    repositoryName: azure-function-python

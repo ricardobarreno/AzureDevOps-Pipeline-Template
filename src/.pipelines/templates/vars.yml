@@ -1,0 +1,26 @@
+parameters:
+  - name: language
+    type: string
+    values:
+      - dotnet
+      - python
+      - nodejs
+
+variables:
+  - name: dockerHubUsername
+    value: richibarreno
+  - name: containerRegistry
+    value: DockerHub
+  - name: containerRegistryServer
+    value: docker.io
+  - name: azureSubscription
+    value: GlobalAzure-Template-Pipelines
+  - name: apiContainerName
+    ${{ if eq(parameters.language, 'dotnet') }}:
+      value: dotnet-containerapp
+    ${{ if eq(parameters.language, 'python') }}:
+      value: python-containerapp
+    ${{ if eq(parameters.language, 'nodejs') }}:
+      value: nodejs-containerapp
+  - name: resourceGroupName
+    value: GlobalAzure-Template-Pipelines

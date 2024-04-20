@@ -10,18 +10,11 @@ parameters:
   - name: repositoryName
     type: string
 
-stages:
-  - stage: parameters
-    displayName: Parameters
-    jobs:
-      - job: show_parameters
-        displayName: 'Show Parameters'
-        steps:
-          - script: |
-              echo "language --> ${{ parameters.language }}" 
-              echo "workingDirectory --> ${{ parameters.workingDirectory }}" 
-              echo "repositoryName --> ${{ parameters.repositoryName }}" 
 
+variables:
+  - template: vars.yml
+
+stages:
   - ${{ if eq(parameters.language, 'dotnet') }}: 
     - template: dotnet-build-stage.yml
       parameters:
@@ -29,8 +22,10 @@ stages:
   
   - template: contenerization-stage.yml
     parameters:
-      containerRegistry: 'DockerHub'
-      repository: ${{ parameters.repositoryName }}
+      containerRegistry: '${{ variables.containerRegistry }}'
+      repository: '${{ variables.dockerHubUsername }}/${{ parameters.repositoryName }}'
       buildContext: ${{ parameters.workingDirectory }}
   
   - template: deployment-stage.yml
+    parameters:
+      repository: '${{ variables.dockerHubUsername }}/${{ parameters.repositoryName }}'
