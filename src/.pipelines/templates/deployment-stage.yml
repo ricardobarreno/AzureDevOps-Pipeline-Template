@@ -1,5 +1,11 @@
 parameters:
-  - name: repository
+  - name: azureSubscription
+    type: string
+  - name: containerAppName
+    type: string
+  - name: resourceGroup
+    type: string
+  - name: imageToDeploy
     type: string
 
 stages:
@@ -12,17 +18,12 @@ stages:
         displayName: 'Deploying'
         
         steps:
-          - bash: |
-              echo "${{ variables.azureSubscription }}"
-              echo "${{ variables.containerAppName }}"
-              echo "${{ variables.resourceGroupName }}"
-              echo "${{ variables.containerRegistryServer }}/${{ parameters.repository }}:$(Build.BuildId)"
-          
+
           - task: AzureContainerApps@1
             name: deploy_containerapp
             displayName: 'Deploy ContainerApp'
             inputs:
-              azureSubscription: '${{ variables.azureSubscription }}'
-              containerAppName: '${{ variables.containerAppName }}'
-              resourceGroup: '${{ variables.resourceGroupName }}'
-              imageToDeploy: '${{ variables.containerRegistryServer }}/${{ parameters.repository }}:$(Build.BuildId)'
+              azureSubscription: '${{ parameters.azureSubscription }}'
+              containerAppName: '${{ parameters.containerAppName }}'
+              resourceGroup: '${{ parameters.resourceGroup }}'
+              imageToDeploy: '${{ parameters.imageToDeploy }}'
