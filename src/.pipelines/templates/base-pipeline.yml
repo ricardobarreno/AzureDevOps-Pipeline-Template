@@ -13,6 +13,9 @@ parameters:
 
 variables:
   - template: vars.yml
+    parameters:
+      language: ${{ parameters.language }}
+      
 
 stages:
   - ${{ if eq(parameters.language, 'dotnet') }}: 
